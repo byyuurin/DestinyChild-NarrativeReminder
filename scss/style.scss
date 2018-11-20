@@ -1,0 +1,190 @@
+@import 'function';
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.5vw;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3vw;
+  }
+}
+
+:root {
+  --linear-dark: transparent;
+  --linear-light: transparent;
+  --color-dark: var(--dark);
+  --color-light: var(--light);
+}
+
+body {
+  background-size: 56px 56px;
+  background-image: linear-gradient(
+    135deg,
+    var(--linear-dark) 0px,
+    var(--linear-dark) 20px,
+    var(--linear-light) 20px,
+    var(--linear-light) 40px,
+    var(--linear-dark) 40px,
+    var(--linear-dark) 60px,
+    var(--linear-light) 60px,
+    var(--linear-light) 80px
+  );
+  color: var(--color-dark);
+  font-family: 'Mplus 1p', 'Microsoft JhengHei';
+  user-select: none;
+}
+
+img {
+  vertical-align: middle;
+  width: 100%;
+}
+
+h1 {
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  a {
+    color: var(--color-dark);
+    text-shadow: 0 0 5px var(--linear-light);
+    font-weight: 900;
+    &:link {
+      color: var(--color-dark);
+      text-decoration: none;
+    }
+  }
+}
+
+p {
+  strong {
+    padding-right: 1em;
+    font-family: '微軟正黑體';
+  }
+}
+
+.header-title {
+  position: relative;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.title-word {
+  cursor: pointer;
+}
+
+.title-word > .word-en {
+  padding: 0.25vw 0.5vw;
+  font-size: 0;
+  border-radius: 4px;
+}
+
+.title-word > .word-en > span {
+  padding: 0 0.5vw;
+  font-size: 4vw;
+  font-weight: 800;
+  height: 6vw;
+  line-height: 6vw;
+  border-radius: 4px;
+}
+
+.title-word > .word-en > span:last-child {
+  font-size: 5.25vw;
+  font-family: Arial;
+  font-weight: 600;
+  letter-spacing: -0.5vw;
+  vertical-align: bottom;
+}
+
+.title-word > .word-jp {
+  text-shadow: 0 0 1px black;
+  font-size: 1.5vw;
+}
+
+.banner {
+  position: relative;
+
+  > img {
+    filter: grayscale(100%);
+    transition: 0.3s;
+  }
+  &.enabled > img {
+    filter: grayscale(0%);
+  }
+
+  > .btn {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    > span {
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+  }
+  .btn-prev {
+    left: 0;
+    > span {
+      border-width: 20px 10px 20px 0;
+      border-color: transparent rgba(255, 255, 255, 0.5) transparent transparent;
+    }
+    &:hover > span {
+      border-color: transparent #fff transparent transparent;
+    }
+  }
+  .btn-next {
+    right: 0;
+    > span {
+      border-width: 20px 0 20px 10px;
+      border-color: transparent transparent transparent rgba(255, 255, 255, 0.5);
+    }
+    &:hover > span {
+      border-color: transparent transparent transparent #fff;
+    }
+  }
+}
+
+.table {
+  text-align: right;
+  thead {
+    tr,
+    th {
+      background-color: var(--color-dark);
+      color: var(--light);
+    }
+    th:first-child {
+      text-align: center;
+      font-family: '微軟正黑體';
+    }
+  }
+  tbody {
+    tr,
+    td {
+      opacity: 1;
+      border-color: var(--color-dark);
+    }
+    td:first-child {
+      text-align: center;
+    }
+  }
+}
+
+.table-focus {
+  font-weight: 900;
+  border-width: 3px;
+  border-style: solid;
+  border-color: var(--color-dark);
+  opacity: 1;
+  > td {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+  }
+}

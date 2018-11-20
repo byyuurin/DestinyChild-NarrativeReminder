@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>收集品計算 - Destiny Child</title>
+    <link rel="Shortcut Icon" type="image/x-icon" href="images/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/earlyaccess/mplus1p.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style/style.css" />
+  </head>
+
+  <body>
+    <div id="app" class="container">
+      <template v-if="setting">
+        <h1>
+          <a :href="setting.link" target="_blank"> {{ setting.title }} </a>
+        </h1>
+        <div class="row">
+          <div class="col-12 col-xl-4">
+            <div class="row">
+              <div class="col-12 col-lg-7 col-xl-12">
+                <div class="banner" :class="{enabled: dayLeft >= 0}">
+                  <img :src="setting.banner" :alt="setting.title" />
+                  <a class="btn btn-prev" @click="changeShowIndex(-1)"> <span></span></a>
+                  <a class="btn btn-next" @click="changeShowIndex(1)"><span></span></a>
+                  <hr class="d-none" />
+                </div>
+              </div>
+              <div class="col-12 col-lg-5 col-xl-12">
+                <hr class="d-block d-lg-none d-xl-block" />
+                <div class="row">
+                  <div class="col-12 col-sm-6 col-lg-12">
+                    <strong>開催期間</strong> <br class="d-none d-sm-block" />
+                    {{ setting.eventStart }} ～ {{ setting.eventEnd }}
+                  </div>
+                  <div class="col-12 col-sm-6 col-lg-12">
+                    <hr class="d-block d-sm-none d-lg-block " />
+                    <strong>BOOST</strong> 
+                    <br class="d-none d-sm-block" />
+                    <select v-model="boost">
+                      <option :value="value" v-for="value in setting.boost"
+                        >+{{ value - 100 }}%</option
+                      >
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-12" v-if="setting.reward">
+                    <hr class="d-xl-block" />
+                    <div class="row">
+                      <p class="col-4 col-lg-5 col-xl-12">
+                        <strong>期望值(1回)</strong> <br class="d-md-none" />{{
+                          expectedReward(1)
+                        }}
+                      </p>
+                      <p class="col-4 col-lg-5 col-xl-12">
+                        <strong>期望值(1日)</strong> <br class="d-md-none" />{{
+                          expectedReward(setting.freeReset)
+                        }}
+                      </p>
+                      <p class="col-4 col-lg-5 col-xl-12">
+                        <strong>期望值({{ eventDays }}日)</strong>
+                        <br class="d-md-none" />{{
+                          expectedReward(setting.freeReset * eventDays)
+                        }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          </div>
+          <div class="col-12 col-xl-8">
+              <hr class="d-lg-block d-xl-none" />
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>目標值</th>
+                    <th v-for="target in setting.rewardTarget">
+                      {{ numberWithComma(target) }}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    :class="{'table-focus': isToday(day)}"
+                    v-for="(day, index) in days"
+                  >
+                    <td>{{ day }}</td>
+                    <td v-for="target in setting.rewardTarget">
+                      {{ minReward(index + 1, target) }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>            
+          </div>
+        </div>
+        <hr />
+      </template>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js"></script>
+    <script src="./script/script.js"></script>
+  </body>
+</html>
